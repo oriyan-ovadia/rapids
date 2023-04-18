@@ -1,0 +1,63 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true, // For TypeScript
+        // https://stackoverflow.com/questions/57673026/require-and-process-is-not-defined-in-eslint-problem-with-node
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "overrides": [],
+    "parser": "@typescript-eslint/parser", // For TypeScript
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+
+        // For alias setup
+        // See: https://stackoverflow.com/questions/57032522/eslint-complains-about-typescripts-path-aliasing
+        "project": "./tsconfig.json",
+        "tsconfigRootDir": "./"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        // For alias setup
+        // See: https://stackoverflow.com/questions/57032522/eslint-complains-about-typescripts-path-aliasing
+        "@typescript-eslint",
+        "import"
+    ],
+    "rules": {
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        // See: https://stackoverflow.com/questions/59278151/eslint-require-statement-not-part-of-import-statement-typescript-eslint-no-va
+        "@typescript-eslint/no-var-requires": "off",
+        // Suppress errors for missing 'import React' in files
+        "react/react-in-jsx-scope": "off",
+        // TODO: It doesn't work
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "*", "next": ["return", "if"] },
+            {
+                "blankLine": "any",
+                "prev": ["const", "let", "var"],
+                "next": ["const", "let", "var"]
+            },
+            { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+            { "blankLine": "any", "prev": ["import", "export"], "next": ["import", "export"] },
+            { "blankLine": "always", "prev": "*", "next": "class" },
+            { "blankLine": "always", "prev": "class", "next": "*" },
+            { "blankLine": "always", "prev": "*", "next": "function" },
+            { "blankLine": "always", "prev": "function", "next": "*" }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
+}
